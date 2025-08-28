@@ -1,29 +1,29 @@
-import Image from "next/image";
-import { Button } from "./ui/button";
+
+// import React from "react";
+
+// export default function HeroSection({ data }: { data: any }) {
+//   if (!data) return null;
+
+//   return (
+//     <section className="hero">
+//       <h1>{data.heading}</h1>
+//       <p>{data.text}</p>
+//       {data.image?.data?.attributes?.url && (
+//         <img
+//           src={`http://localhost:1337${data.image.data.attributes.url}`}
+//           alt={data.image.data.attributes.alternativeText || "Hero Image"}
+//         />
+//       )}
+//     </section>
+//   );
+// }
+
+import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import heroImage from "@/assets/tractor.png";
 
-interface ImageProps {
-  src: string;
-  alt: string;
-//   width: number;
-//   height: number;
-}
-
-export interface HeroProps {
-    id: number; 
-    heading: string;
-    text: string;
-    image: ImageProps;
-
-  // add other properties if needed
-}
-
-export default function HeroSection({ data }: { data: HeroProps | null }) {
-
-    if (!data) return null;
-
-    const { heading, text, image } = data;
-
+export default function HeroSection({ data }: { data: any }) {
+  if (!data) return null;
   return (
     <section id="home" className="relative min-h-screen flex items-center bg-gradient-to-br from-background to-agricultural-earth-light">
       <div className="container mx-auto px-2 sm:px-6 lg:px-8 py-20">
@@ -32,22 +32,16 @@ export default function HeroSection({ data }: { data: HeroProps | null }) {
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                <span className="text-agricultural-earth">Jigawa</span>
-                 <span className="text-primary block">Farm Mechanization</span>
-
-                <span className="text-agricultural-earth">Services</span>
+                {data.heading}
+                {/* Jigawa Farm
+                <span className="text-primary block">Mechanization</span>
+                <span className="text-agricultural-earth">Services</span> */}
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-lg">
-                {text}
-                Revolutionizing farming with cutting-edge machinery and technology.
-                Increase productivity, reduce costs, and maximize your agricultural potential. 
+                {data.text}
+                
               </p>
-  
-            </div>
-            <div>
-              <h1>{data?.heading}</h1>
-              <p>{data?.text}</p>
             </div>
 
             {/* Key Benefits */}
@@ -74,47 +68,37 @@ export default function HeroSection({ data }: { data: HeroProps | null }) {
               <Button variant="outline" size="lg">
                 View Our Services
               </Button>
-              {/* <Link href={link.url}>{link.text}</Link> */}
             </div>
           </div>
 
           {/* Hero Image */}
           <div className="relative">
             <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-              <Image
+              <img
                 src="/YTOtractor.jpg"
-                alt="Modern agricultural machinery in operation"
-                width={300}
-                height={200}
+                // alt="Modern agricultural machinery in operation"
+                alt={data.image.alternativeText || "Hero Image"}
                 className="w-full h-[300px] lg:h-[400px] object-cover"
               />
               <div className="bg-white flex justify-between items-center p-2 ">
-                <Image
+                <img
                 src="/ytodisc-plough.jpg"
                 alt="YTO plough"
-                width={100}
-                height={50}
                 className="w-[100px] h-[30px] lg:h-[50px] object-cover"
                 />
-                <Image
+                <img
                   src="/ytoplanter.jpg"
                   alt="YTO Planter"
-                  width={100}
-                  height={50}
                   className="w-[100px] h-[30px] lg:h-[50px] object-cover"
                 />
-                <Image
+                <img
                   src="/grain-harvester.jpg"
                   alt="YTO Harvester"
-                  width={100}
-                  height={50}
                   className="w-[100px] h-[30px] lg:h-[50px] object-cover"
                 />
-                <Image
+                <img
                   src="/dump-trailer.jpg"
                   alt="Dump Trailer"
-                  width={100}
-                  height={50}
                   className="w-[100px] h-[30px] lg:h-[50px] object-cover"
                 />
               </div>
@@ -138,6 +122,8 @@ export default function HeroSection({ data }: { data: HeroProps | null }) {
           </div>
         </div>
       </div>
-</section>
-  )
-}
+    </section>
+  );
+};
+
+

@@ -2,7 +2,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Tractor, Wrench, Truck, Users, Settings, Headphones } from "lucide-react";
 
-const Services = () => {
+export default function ServiceSection({ data }: { data: any }) {
+  if (!data) return null;
+  console.log(data);
   const services = [
     {
       icon: Tractor,
@@ -48,11 +50,13 @@ const Services = () => {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            Comprehensive Agricultural Solutions
+            {/* Comprehensive Agricultural Solutions */}
+            {data.heading}
           </h2>
           <p className="text-lg text-muted-foreground">
-            From cutting-edge machinery to expert support, we provide everything you need 
-            to modernize your agricultural operations and maximize productivity.
+            {data.subheading}
+            {/* From cutting-edge machinery to expert support, we provide everything you need 
+            to modernize your agricultural operations and maximize productivity. */}
           </p>
         </div>
 
@@ -107,5 +111,3 @@ const Services = () => {
     </section>
   );
 };
-
-export default Services;
