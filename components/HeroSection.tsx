@@ -20,7 +20,7 @@
 
 import { Button } from "@/components/ui/button";
 import { ArrowRight, CheckCircle } from "lucide-react";
-import heroImage from "@/assets/tractor.png";
+import Image from "next/image";
 
 export default function HeroSection({ data }: { data: any }) {
   if (!data) return null;
@@ -31,7 +31,7 @@ export default function HeroSection({ data }: { data: any }) {
           {/* Content */}
           <div className="space-y-8">
             <div className="space-y-6">
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl text-agricultural-earth font-bold text-foreground leading-tight">
                 {data.heading}
                 {/* Jigawa Farm
                 <span className="text-primary block">Mechanization</span>
@@ -73,12 +73,11 @@ export default function HeroSection({ data }: { data: any }) {
 
           {/* Hero Image */}
           <div className="relative">
-            <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <img
-                src="/YTOtractor.jpg"
-                // alt="Modern agricultural machinery in operation"
+                src={`http://localhost:1337${data.image.url}`}
                 alt={data.image.alternativeText || "Hero Image"}
-                className="w-full h-[300px] lg:h-[400px] object-cover"
+                className="w-full h-[250px] lg:h-[350px] object-cover"
               />
               <div className="bg-white flex justify-between items-center p-2 ">
                 <img
@@ -102,7 +101,7 @@ export default function HeroSection({ data }: { data: any }) {
                   className="w-[100px] h-[30px] lg:h-[50px] object-cover"
                 />
               </div>
-                
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
             </div>
             
             {/* Floating Stats Card */}

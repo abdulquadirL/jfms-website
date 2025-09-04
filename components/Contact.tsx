@@ -6,8 +6,8 @@ import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
 export default function Contact({ data }: { data: any }) {  //{ data }: { data: any }
-   if (!data) return null;
-   console.log(data);
+   //if (!data) return null;
+   //console.log(data);
   const contactInfo = [
     {
       icon: MapPin,
@@ -41,13 +41,13 @@ export default function Contact({ data }: { data: any }) {  //{ data }: { data: 
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {/* Get in Touch with Our Experts */}
-            {data.heading}
+            Get in Touch with Our Experts
+            {/* {data.heading} */}
           </h2>
           <p className="text-lg text-muted-foreground">
-            {/* Ready to modernize your agricultural operations? Contact our experts for 
-            personalized solutions and competitive pricing. */}
-            {data.description}
+            Ready to modernize your agricultural operations? Contact our experts for 
+            personalized solutions and competitive pricing.
+            {/* {data.description} */}
           </p>
         </div>
 
