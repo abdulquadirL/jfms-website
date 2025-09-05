@@ -34,8 +34,8 @@ export default function HeroSection({ data }: { data: any }) {
               <h1 className="text-3xl md:text-4xl lg:text-5xl text-agricultural-earth font-bold text-foreground leading-tight">
                 {data.heading}
                 {/* Jigawa Farm
-                <span className="text-primary block">Mechanization</span>
-                <span className="text-agricultural-earth">Services</span> */}
+                <span className="text-primary block">Mechanization</span> */}
+                {/* <span className="text-agricultural-earth">Services</span> */}
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-lg">
@@ -77,7 +77,7 @@ export default function HeroSection({ data }: { data: any }) {
               <img
                 src={`http://localhost:1337${data.image.url}`}
                 alt={data.image.alternativeText || "Hero Image"}
-                className="w-full h-[250px] lg:h-[350px] object-cover"
+                className="w-full h-[250px] lg:h-[300px] object-fit"
               />
               <div className="bg-white flex justify-between items-center p-2 ">
                 <img
