@@ -33,14 +33,11 @@ export default function HeroSection({ data }: { data: any }) {
             <div className="space-y-6">
               <h1 className="text-3xl md:text-4xl lg:text-5xl text-agricultural-earth font-bold text-foreground leading-tight">
                 {data.heading}
-                {/* Jigawa Farm
-                <span className="text-primary block">Mechanization</span> */}
-                {/* <span className="text-agricultural-earth">Services</span> */}
+                
               </h1>
               
               <p className="text-lg md:text-xl text-muted-foreground max-w-lg">
                 {data.text}
-                
               </p>
             </div>
 
