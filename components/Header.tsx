@@ -9,10 +9,10 @@ const Header = () => {
 
   const navigation = [
     { name: "Home", href: "/" },
-    { name: "Services", href: "#services" },
+    { name: "Services", href: "/#services" },
     { name: "News & Events", href: "/news" },
-    { name: "About", href: "#about" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/#about" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -66,14 +66,14 @@ const Header = () => {
           <div className="md:hidden border-t border-border">
             <nav className="px-2 pt-2 pb-3 space-y-1">
               {navigation.map((item) => (
-                <a
+                <Link
                   key={item.name}
                   href={item.href}
                   className="block px-3 py-2 text-foreground hover:text-primary transition-colors duration-200 font-medium"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
-                </a>
+                </Link>
               ))}
               <div className="px-3 py-2">
                 <Button variant="default" size="sm" className="w-full">
