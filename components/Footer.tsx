@@ -74,7 +74,7 @@ const Footer = () => {
               {footerLinks.services.map((link, index) => (
                 <li key={index}>
                   <a 
-                    href="#services" 
+                    href="/#services" 
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link}
@@ -91,7 +91,7 @@ const Footer = () => {
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
                   <a 
-                    href="#about" 
+                    href="/#about" 
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link}
@@ -108,7 +108,7 @@ const Footer = () => {
               {footerLinks.media.map((link, index) => (
                 <li key={index}>
                   <a 
-                    href="#media" 
+                    href="/news" 
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link}
@@ -125,7 +125,7 @@ const Footer = () => {
               {footerLinks.support.map((link, index) => (
                 <li key={index}>
                   <a 
-                    href="#contact" 
+                    href="/#contact" 
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link}

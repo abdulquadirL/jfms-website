@@ -145,19 +145,11 @@ export default function About() {
             Meet Our Team
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                name: "Hon. Mutaka Namadi",
-                role: "Commisioner for Agriculture",
-                experience: "",
-                specialties: ["", ""],
-                image: "/person.png",
-              },
-              {
-                name: "Dr. Ado Nasiru",
-                role: "Managing Director",
-                experience: "",
-                specialties: ["", ""],
+            {[{
+              name: "Dr. Ado Nasiru",
+              role: "Managing Director",
+              experience: "",
+              specialties: ["", ""],
                 image: "/person.png",
               },
               {
