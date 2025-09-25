@@ -102,10 +102,10 @@ export default function About() {
                 Jigawa Farm Mechanization Services was established in 2025 as part of a bold
                 move by the current administration to tackle hunger and improve food security
                 through smarter, more efficient farming evident in the Governor's 12-Point Agenda where Agriculture is a key focus.
-                Inspired by Governor Umar Namadi’s vision for a self-sufficient and food-secure Jigawa,
+                Inspired by Governor Umar Namadi vision for a self-sufficient and food-secure Jigawa,
                 the company has grown into a trusted partner for farmers across the state.
                  From tractors to training, we provide the tools, support, and innovation needed to 
-                 help Jigawa’s farmers thrive—one harvest at a time.
+                 help Jigawa farmers thrive—one harvest at a time.
               </p>
               <p>
                 Jigawa State Government led by Governor Umar Namadi, a visionary leader, understood the challenges faced by 
