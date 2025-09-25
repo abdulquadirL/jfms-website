@@ -40,23 +40,23 @@ async function getAllArticles(): Promise<Article[]> {
     console.error("Failed to fetch all articles:", res.statusText);
     return [];
   }
-
-  const json: { data: StrapiArticleResponse[] } = await res.json();
-
-  return json.data.map((article) => ({
-    id: article.id,
-    title: article.attributes.title,
-    slug: article.attributes.slug,
-    excerpt: article.attributes.excerpt,
-    content: article.attributes.content,
-    featuredImage: article.attributes.featuredImage?.data
-      ? {
-          url: article.attributes.featuredImage.data.attributes.url,
-          alternativeText:
-            article.attributes.featuredImage.data.attributes.alternativeText,
-        }
-      : undefined,
-  }));
+  const data = await res.json();
+  // const json: { data: StrapiArticleResponse[] } = await res.json();
+  return data.data;
+  // return json.data.map((article) => ({
+  //   id: article.id,
+  //   title: article.attributes.title,
+  //   slug: article.attributes.slug,
+  //   excerpt: article.attributes.excerpt,
+  //   content: article.attributes.content,
+  //   featuredImage: article.attributes.featuredImage?.data
+  //     ? {
+  //         url: article.attributes.featuredImage.data.attributes.url,
+  //         alternativeText:
+  //           article.attributes.featuredImage.data.attributes.alternativeText,
+  //       }
+  //     : undefined,
+  // }));
 }
 
 export default async function NewsPage() {

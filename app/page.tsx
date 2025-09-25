@@ -47,28 +47,31 @@ async function getArticles(): Promise<Article[]> {
     console.error("Failed to fetch articles:", res.statusText);
     return [];
   }
+  const data =  await res.json();
+  return data.data
 
-  const json: { data: StrapiArticleResponse[] } = await res.json();
+  // const json: { data: StrapiArticleResponse[] } = await res.json();
 
-  return json.data.map((article) => ({
-    id: article.id,
-    title: article.attributes.title,
-    slug: article.attributes.slug,
-    excerpt: article.attributes.excerpt,
-    content: article.attributes.content,
-    featuredImage: article.attributes.featuredImage?.data
-      ? {
-          url: article.attributes.featuredImage.data.attributes.url,
-          alternativeText: article.attributes.featuredImage.data.attributes.alternativeText,
-        }
-      : undefined,
-  }));
+  // return json.data.map((article) => ({
+  //   id: article.id,
+  //   title: article.attributes?.title,
+  //   slug: article.attributes?.slug,
+  //   excerpt: article.attributes?.excerpt,
+  //   content: article.attributes?.content,
+  //   featuredImage: article.attributes?.featuredImage?.data
+  //     ? {
+  //         url: article.attributes.featuredImage.data.attributes?.url,
+  //         alternativeText: article.attributes.featuredImage.data.attributes?.alternativeText,
+  //       }
+  //     : undefined,
+  // }));
 }
 
 
 
 export default async function Page() {
   const articles = await getArticles();
+  console.log("ARTICLE:",articles)
 
   const data = await fetch('http://localhost:1337/api/home-page?populate[blocks][on][layout.hero][populate]=*')
   const homes = await data.json()
