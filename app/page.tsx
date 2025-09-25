@@ -65,6 +65,7 @@ export default async function Page() {
 
   const data = await fetch('http://localhost:1337/api/home-page?populate[blocks][on][layout.hero][populate]=*')
   const homes = await data.json()
+  console.log(homes.data.blocks[2])
 //data={homes.data.blocks[2]}
   if (!homes) {
     return <div>Loading...</div>;
