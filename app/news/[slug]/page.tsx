@@ -1,7 +1,5 @@
-"use client"
-import React from "react";
 import Link from "next/link";
-import { notFound, useParams } from "next/navigation";
+import { notFound } from "next/navigation";
 import Image from "next/image";
 
 type FeaturedImage = {
@@ -47,8 +45,12 @@ async function getSuggestedArticles(slug: string): Promise<Article[]> {
   return json.data as Article[];
 }
 
-export default async function ArticlePage() {
-  const params = useParams<{ slug: string }>();
+// ✅ Use params from Next.js
+export default async function ArticlePage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   const article = await getArticle(params.slug);
 
   if (!article) {
@@ -59,7 +61,6 @@ export default async function ArticlePage() {
 
   return (
     <article className="max-w-4xl mx-auto px-6 py-12">
-      {/* Article Header */}
       <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
 
       {article.featuredImage?.url && (
@@ -72,22 +73,17 @@ export default async function ArticlePage() {
         />
       )}
 
-      {/* Content */}
       <div
         className="prose prose-lg"
         dangerouslySetInnerHTML={{ __html: article.content }}
       />
 
-      {/* Suggested Reads */}
       {suggested.length > 0 && (
         <section className="mt-12">
           <h2 className="text-2xl font-semibold mb-6">Suggested Reads</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {suggested.map((s) => (
-              <div
-                key={s.id}
-                className="border rounded-lg shadow p-4 flex flex-col"
-              >
+              <div key={s.id} className="border rounded-lg shadow p-4 flex flex-col">
                 {s.featuredImage?.url && (
                   <Image
                     width={400}
@@ -97,10 +93,8 @@ export default async function ArticlePage() {
                     className="w-full h-40 object-cover rounded mb-4"
                   />
                 )}
-
                 <h3 className="text-lg font-semibold mb-2">{s.title}</h3>
                 <p className="text-gray-600 mb-3">{s.excerpt}</p>
-
                 <Link
                   href={`/news/${s.slug}`}
                   className="mt-auto inline-block text-green-700 font-medium hover:underline"
