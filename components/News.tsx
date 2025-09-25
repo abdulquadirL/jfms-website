@@ -14,6 +14,7 @@ type Article = {
   };
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
 export default function News({ articles }: { articles: Article[] }) {
   if (!articles || articles.length === 0) {
     return (
@@ -33,10 +34,13 @@ export default function News({ articles }: { articles: Article[] }) {
 
         <div className="grid gap-6 md:grid-cols-3">
           {articles.map((article) => (
-            <div key={article.id} className="border p-4 rounded-lg shadow hover:shadow-md transition">
+            <div
+              key={article.id}
+              className="border p-4 rounded-lg shadow hover:shadow-md transition"
+            >
               {article.featuredImage?.url && (
                 <Image
-                  src={`http://localhost:1337${article.featuredImage.url}`}
+                  src={`${API_URL}${article.featuredImage.url}`}
                   alt={article.featuredImage.alternativeText || article.title}
                   className="w-full h-48 object-cover rounded mb-4"
                   width={500}

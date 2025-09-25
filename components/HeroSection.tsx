@@ -13,6 +13,8 @@ type HeroSectionProps = {
   };
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+
 export default function HeroSection({ data }: HeroSectionProps) {
   if (!data) return null;
   return (
@@ -24,7 +26,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
         {/* Mobile Hero Image*/}
         <div className="lg:hidden relative rounded-2xl overflow-hidden shadow-xl">
           <Image
-            src={`http://localhost:1337${data.image.url}`}
+            src={`${API_URL}${data.image.url}`}
             alt={data.image.alternativeText || "Hero Image"}
             className="w-full h-[250px] lg:h-[300px] object-cover"
             width={600}
@@ -106,7 +108,7 @@ export default function HeroSection({ data }: HeroSectionProps) {
           <div className="hidden relative lg:block ">
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
               <Image
-                src={`http://localhost:1337${data.image.url}`}
+                src={`${API_URL}${data.image.url}`}
                 alt={data.image.alternativeText || "Hero Image"}
                 className="w-full h-[300px] object-cover"
                 width={600}
