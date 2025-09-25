@@ -1,5 +1,6 @@
 import { MapPin, Phone, Mail } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
+import Link from "next/link";
 
 
 const Footer = () => {
@@ -73,12 +74,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.services.map((link, index) => (
                 <li key={index}>
-                  <a 
+                  <Link
                     href="/#services" 
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

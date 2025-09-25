@@ -2,7 +2,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import { Tractor, Wrench, Truck, Users, Settings, Headphones } from "lucide-react";
 
-export default function ServiceSection({ data }: { data: any }) {
+type ServiceSectionProps = {
+  data: {
+    heading: string;
+    subheading: string;
+  };
+};
+
+
+export default function ServiceSection({ data }: ServiceSectionProps) {
   if (!data) return null;
   console.log(data);
   const services = [
