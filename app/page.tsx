@@ -1,19 +1,5 @@
-//interface HomePageProps {
-  //        Any props if needed
-   //data: {
-     //_component: string;
-     //id: number;
-     //heading: string;
-     //subheading?: string;
-     //image?: { url: string; alternativeText?: string };
-     //link?: { url: string; label: string };
-  // }
-/// }
-
 import About from "@/components/About";
 import Contact from "@/components/Contact";
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
 import News from "@/components/News";
 import ServiceSection from "@/components/ServiceSection";
