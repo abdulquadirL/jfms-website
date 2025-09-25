@@ -74,7 +74,7 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.services.map((link, index) => (
                 <li key={index}>
-                  <Link
+                  <Link 
                     href="/#services" 
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
@@ -91,12 +91,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.company.map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href="/#about" 
+                  <Link
+                    href="/#about"
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -108,12 +108,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.media.map((link, index) => (
                 <li key={index}>
-                  <a 
-                    href="/news" 
+                  <Link 
+                    href="/news"
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -125,12 +125,12 @@ const Footer = () => {
             <ul className="space-y-2">
               {footerLinks.support.map((link, index) => (
                 <li key={index}>
-                  <a 
+                  <Link 
                     href="/#contact" 
                     className="text-sm text-primary-foreground/80 hover:text-primary-foreground transition-colors"
                   >
                     {link}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -148,24 +148,24 @@ const Footer = () => {
           
           <div className="flex space-x-6 text-sm">
             
-            <a 
+            <Link 
               href="#" 
               className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
             >
               Privacy Policy
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="#" 
               className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
             >
               Terms of Service
-            </a>
-            <a 
+            </Link>
+            <Link 
               href="#" 
               className="text-primary-foreground/80 hover:text-primary-foreground transition-colors"
             >
               Cookie Policy
-            </a>
+            </Link>
           </div>
         </div>
       </div>

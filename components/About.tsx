@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Award, Users, Globe, TrendingUp } from "lucide-react";
+import Image from "next/image";
 
 export default function About() {
 
@@ -89,10 +90,12 @@ export default function About() {
             <h3 className="text-2xl font-bold text-foreground">Our Story</h3>
             <div className="space-y-4 text-muted-foreground">
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                <img
+                <Image
                   src="/jigawa.jpg"
                   alt="Track"
                   className="w-full h-full object-cover"
+                  width={600}
+                  height={400}
                 />
               </div>
               <p>
@@ -197,17 +200,7 @@ export default function About() {
                   <p className="text-sm text-muted-foreground">{member.role}</p>
                 </CardHeader>
                 <CardContent className="pt-0 flex-1 flex flex-col">
-                  {/* <p className="text-muted-foreground mb-2">{member.experience} experience</p> */}
-                  {/* <div className="flex flex-wrap justify-center gap-1 mb-2">
-                    {member.specialties.map((specialty) => (
-                      <span
-                        key={specialty}
-                        className="inline-block bg-primary/10 text-primary text-xs font-medium py-1 px-2 rounded"
-                      >
-                        {specialty}
-                      </span>
-                    ))}
-                  </div> */}
+                 
                 </CardContent>
               </Card>
             ))}
@@ -251,10 +244,10 @@ export default function About() {
           
             {/* Partner Logos */}
             <div className="flex flex-wrap justify-center  gap-4 pt-6">
-              <img src="/ytoLogo.jpeg" alt="YTO" className="h-12" />
-              <img src="/agra.jpg" alt="AGRA" className="h-12 " />
-              <img src="/camclogo.png" alt="CAMCEE" className="h-12" />
-              <img src="/everyfarmerlogo.png" alt="Everyfarmer" className="h-12" />
+              <Image src="/ytoLogo.jpeg" alt="YTO" className="h-12" width={100} height={50} />
+              <Image src="/agra.jpg" alt="AGRA" className="h-12 " width={100} height={50} />
+              <Image src="/camclogo.png" alt="CAMCEE" className="h-12" width={100} height={50} />
+              <Image src="/everyfarmerlogo.png" alt="Everyfarmer" className="h-12" width={100} height={50} />
             </div>
         </div>
       </div>
