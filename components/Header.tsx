@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,10 +21,12 @@ const Header = () => {
       <div className="container w-[80vw] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-17 py-2">
           {/* Logo */}
-          <img
+          <Image
               src="/logo.jpg"
               alt="Jigawa State Mechanization Company Logo"
               className="h-16 w-16 rounded-full"
+              width={64}
+              height={64}
             />
           <div className="flex-shrink-0">
             

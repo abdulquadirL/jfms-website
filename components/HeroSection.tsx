@@ -9,28 +9,28 @@ export default function HeroSection({ data }: { data: any }) {
       <div className="container space-y-8 mx-auto px-2 sm:px-6 lg:px-8 py-20">
         {/* Mobile Hero Image*/}
         <div className="lg:hidden relative rounded-2xl overflow-hidden shadow-xl">
-              <img
+              <Image
                 src={`http://localhost:1337${data.image.url}`}
                 alt={data.image.alternativeText || "Hero Image"}
                 className="w-full h-[250px] lg:h-[300px] object-cover"
               />
               <div className="bg-white flex justify-between items-center p-2 ">
-                <img
+                <Image
                 src="/ytodisc-plough.jpg"
                 alt="YTO plough"
                 className=" w-[100px] h-[50px] object-cover"
                 />
-                <img
+                <Image
                   src="/ytoplanter.jpg"
                   alt="YTO Planter"
                   className="w-[100px] h-[50px] object-cover"
                 />
-                <img
+                <Image
                   src="/grain-harvester.jpg"
                   alt="YTO Harvester"
                   className="w-[100px] h-[50px] object-cover"
                 />
-                <img
+                <Image
                   src="/dump-trailer.jpg"
                   alt="Dump Trailer"
                   className="w-[100px] h-[50px] object-cover"
@@ -84,31 +84,41 @@ export default function HeroSection({ data }: { data: any }) {
           <div className="hidden relative lg:block ">
 
             <div className="relative rounded-2xl overflow-hidden shadow-xl">
-              <img
+              <Image
                 src={`http://localhost:1337${data.image.url}`}
                 alt={data.image.alternativeText || "Hero Image"}
                 className="w-full h-[300px] object-cover"
+                width={600}
+                height={400}
               />
               <div className="bg-white flex justify-between items-center p-2 ">
-                <img
+                <Image
                 src="/ytodisc-plough.jpg"
                 alt="YTO plough"
                 className=" w-[100px] h-[50px] object-cover"
+                width={100}
+                height={50}
                 />
-                <img
+                <Image
                   src="/ytoplanter.jpg"
                   alt="YTO Planter"
                   className="w-[100px] h-[50px] object-cover"
+                  width={100}
+                  height={50}
                 />
-                <img
+                <Image
                   src="/grain-harvester.jpg"
                   alt="YTO Harvester"
                   className="w-[100px] h-[50px] object-cover"
+                  width={100}
+                  height={50}
                 />
-                <img
+                <Image
                   src="/dump-trailer.jpg"
                   alt="Dump Trailer"
                   className="w-[100px] h-[50px] object-cover"
+                  width={100}
+                  height={50}
                 />
               </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
