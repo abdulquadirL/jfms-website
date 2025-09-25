@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 
 type Article = {
@@ -34,10 +35,12 @@ export default function News({ articles }: { articles: Article[] }) {
           {articles.map((article) => (
             <div key={article.id} className="border p-4 rounded-lg shadow hover:shadow-md transition">
               {article.featuredImage?.url && (
-                <img
+                <Image
                   src={`http://localhost:1337${article.featuredImage.url}`}
                   alt={article.featuredImage.alternativeText || article.title}
                   className="w-full h-48 object-cover rounded mb-4"
+                  width={500}
+                  height={300}
                 />
               )}
               <h3 className="text-xl font-semibold mb-2">{article.title}</h3>
