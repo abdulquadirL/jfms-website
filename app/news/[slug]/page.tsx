@@ -1,6 +1,8 @@
+"use client"
 import React from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, useParams } from "next/navigation";
+import Image from "next/image";
 
 type FeaturedImage = {
   id: number;
@@ -17,9 +19,11 @@ type Article = {
   featuredImage?: FeaturedImage;
 };
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+
 async function getArticle(slug: string): Promise<Article | null> {
   const res = await fetch(
-    `http://localhost:1337/api/articles?filters[slug][$eq]=${slug}&populate=*`,
+    `${API_URL}/api/articles?filters[slug][$eq]=${slug}&populate=*`,
     { next: { revalidate: 60 } }
   );
 
@@ -33,7 +37,7 @@ async function getArticle(slug: string): Promise<Article | null> {
 
 async function getSuggestedArticles(slug: string): Promise<Article[]> {
   const res = await fetch(
-    `http://localhost:1337/api/articles?filters[slug][$ne]=${slug}&populate=*&pagination[limit]=3&sort=createdAt:desc`,
+    `${API_URL}/api/articles?filters[slug][$ne]=${slug}&populate=*&pagination[limit]=3&sort=createdAt:desc`,
     { next: { revalidate: 60 } }
   );
 
@@ -43,11 +47,12 @@ async function getSuggestedArticles(slug: string): Promise<Article[]> {
   return json.data as Article[];
 }
 
-export default async function ArticlePage({ params }: { params: { slug: string } }) {
+export default async function ArticlePage() {
+  const params = useParams<{ slug: string }>();
   const article = await getArticle(params.slug);
 
   if (!article) {
-    notFound();
+    return notFound();
   }
 
   const suggested = await getSuggestedArticles(params.slug);
@@ -58,8 +63,10 @@ export default async function ArticlePage({ params }: { params: { slug: string }
       <h1 className="text-4xl font-bold mb-4">{article.title}</h1>
 
       {article.featuredImage?.url && (
-        <img
-          src={`http://localhost:1337${article.featuredImage.url}`}
+        <Image
+          width={1200}
+          height={600}
+          src={`${API_URL}${article.featuredImage.url}`}
           alt={article.featuredImage.alternativeText || ""}
           className="w-full max-h-[500px] object-cover rounded mb-6"
         />
@@ -82,8 +89,10 @@ export default async function ArticlePage({ params }: { params: { slug: string }
                 className="border rounded-lg shadow p-4 flex flex-col"
               >
                 {s.featuredImage?.url && (
-                  <img
-                    src={`http://localhost:1337${s.featuredImage.url}`}
+                  <Image
+                    width={400}
+                    height={200}
+                    src={`${API_URL}${s.featuredImage.url}`}
                     alt={s.featuredImage.alternativeText || ""}
                     className="w-full h-40 object-cover rounded mb-4"
                   />
