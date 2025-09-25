@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build --turbopack",
+    "dev": "next dev",
+    "build": "next build",
     "start": "next start",
     "lint": "eslint"
   },
@@ -12,16 +12,28 @@
     "@radix-ui/react-slot": "^1.2.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+<<<<<<< HEAD
     "embla-carousel-react": "^8.6.0",
+=======
+    "cmdk": "^1.1.1",
+    "input-otp": "^1.4.2",
+>>>>>>> bf462954018d282df77771aa7ca8ac8ae22fe0fb
     "lucide-react": "^0.542.0",
     "next": "15.5.2",
     "radix-ui": "^1.4.3",
     "react": "19.1.0",
     "react-day-picker": "^9.11.0",
     "react-dom": "19.1.0",
+    "react-hook-form": "^7.63.0",
+    "react-resizable-panels": "^3.0.6",
     "shadcn": "^3.0.0",
+<<<<<<< HEAD
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.3.1"
+=======
+    "tailwind-merge": "^3.3.1",
+    "vaul": "^1.1.2"
+>>>>>>> bf462954018d282df77771aa7ca8ac8ae22fe0fb
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

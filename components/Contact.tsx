@@ -493,7 +493,10 @@ export default function Contact({ data }: ContactProps) {
   if (!data) return null;
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-muted/30 to-background">
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-b from-muted/30 to-background"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -569,6 +572,7 @@ export default function Contact({ data }: ContactProps) {
                   />
                 </div>
 
+<<<<<<< HEAD
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
                   <Textarea
@@ -579,6 +583,15 @@ export default function Contact({ data }: ContactProps) {
                     required
                   />
                 </div>
+=======
+              <div className="space-y-2">
+                <Label htmlFor="service">Service Interested In</Label>
+                <Input
+                  id="service"
+                  placeholder="e.g., Tractor purchase, Equipment rental"
+                />
+              </div>
+>>>>>>> bf462954018d282df77771aa7ca8ac8ae22fe0fb
 
                 <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? "Sending..." : "Send Message"}
@@ -615,6 +628,39 @@ export default function Contact({ data }: ContactProps) {
                 <p className="text-muted-foreground">No contact info available</p>
               )}
             </div>
+<<<<<<< HEAD
+=======
+
+            {/* Service Areas */}
+            <Card className="border-border">
+              <CardHeader>
+                <CardTitle>Service Areas</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-muted-foreground mb-4">
+                  We proudly serve agricultural communities across the state:
+                </p>
+                <ul className="space-y-2 text-sm">
+                  {[
+                    "Midwest Agricultural Belt",
+                    "Great Plains Region",
+                    "Pacific Northwest",
+                    "Southeastern Farming Communities",
+                    "Southwest Agricultural Areas",
+                  ].map((area, index) => (
+                    <li key={index} className="flex items-center">
+                      <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3" />
+                      <span className="text-muted-foreground">{area}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Don't see your area listed? Contact us to discuss service
+                  availability.
+                </p>
+              </CardContent>
+            </Card>
+>>>>>>> bf462954018d282df77771aa7ca8ac8ae22fe0fb
           </div>
         </div>
       </div>
