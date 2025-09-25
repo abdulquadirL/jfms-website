@@ -16,9 +16,11 @@ type Article = {
   };
 };
 
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
 async function getArticles(): Promise<Article[]> {
   const res = await fetch(
-    "http://localhost:1337/api/articles?populate=featuredImage&sort=createdAt:desc&pagination[limit]=3",
+    `${API_URL}/api/articles?populate=featuredImage&sort=createdAt:desc&pagination[limit]=3`,
     { cache: "no-store" }
   );
 
@@ -29,7 +31,8 @@ async function getArticles(): Promise<Article[]> {
 
   const json = await res.json();
 
-  // Flatten response: extract only the fields we need
+  // Flatten response: extract only the fields we need 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return json.data.map((article: any) => ({
     id: article.id,
     title: article.title,
