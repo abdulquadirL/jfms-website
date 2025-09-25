@@ -190,11 +190,13 @@ export default function About() {
                 aria-label={`Profile of ${member.name}, ${member.role}`}
               >
                 <CardHeader className="pb-3 flex flex-col items-center">
-                  <img
+                  <Image
                     src={member.image}
                     alt={member.name}
                     className="w-20 h-20 rounded-full object-cover mb-3 border-2 border-primary shadow"
                     loading="lazy"
+                    width={80}
+                    height={80}
                   />
                   <CardTitle className="text-lg font-semibold">{member.name}</CardTitle>
                   <p className="text-sm text-muted-foreground">{member.role}</p>
