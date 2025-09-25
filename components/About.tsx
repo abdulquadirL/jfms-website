@@ -151,35 +151,8 @@ export default function About() {
               experience: "",
               specialties: ["", ""],
                 image: "/person.png",
-              },
-              {
-                name: "Zilkifili AbdulKadir Ubali",
-                role: "Fleet Manager",
-                experience: "12 years",
-                specialties: ["Customer Relations", "Market Analysis"],
-                image: "/person.png",
-              },
-              {
-                name: "Ashiru Maiwada Suleiman",
-                role: "Accountant",
-                experience: "5 years",
-                specialties: ["Equipment Maintenance", "Training"],
-                image: "/person.png",
-              },
-              {
-                name: "Umar Suleiman Tafida",
-                role: "Staff Officer",
-                experience: "5 years",
-                specialties: ["Equipment Maintenance", "Training"],
-                image: "/person.png",
-              },
-              {
-                name: "Muhammad Dauda Bulangu",
-                role: "Store Officer",
-                experience: "5 years",
-                specialties: ["Equipment Maintenance", "Training"],
-                image: "/person.png",
-              },
+              }, 
+             
               {
                 name: "Muhammad Ado",
                 role: "Fleet Manager",
@@ -197,6 +170,12 @@ export default function About() {
               {
                 name: "Nura Halilu",
                 role: "Chief Operation Officer",
+                experience: "5 years",
+                specialties: ["Equipment Maintenance", "Training"],
+                image: "/person.png",
+              }, {
+                name: "Muhammad Dauda Bulangu",
+                role: "Store Officer",
                 experience: "5 years",
                 specialties: ["Equipment Maintenance", "Training"],
                 image: "/person.png",

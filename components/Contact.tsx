@@ -5,38 +5,42 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { MapPin, Phone, Mail, Clock } from "lucide-react";
 
-export default function Contact({ data }: { data: any }) {  //{ data }: { data: any }
-   //if (!data) return null;
-   //console.log(data);
+export default function Contact({ data }: { data: any }) {
+  //{ data }: { data: any }
+  //if (!data) return null;
+  //console.log(data);
   const contactInfo = [
     {
       icon: MapPin,
       title: "Visit Our Facility",
       content: "Agricultural Drive, Dutse, Jigawa State, Nigeria",
-      description: "Main headquarters and equipment showroom"
+      description: "Main headquarters and equipment showroom",
     },
     {
       icon: Phone,
       title: "Call Us",
       content: "+234 800 0000 111",
-      description: "24/7 emergency support available"
+      description: "24/7 emergency support available",
     },
     {
       icon: Mail,
       title: "Email Us",
       content: "info@jfms.com",
-      description: "We respond within 24 hours"
+      description: "We respond within 24 hours",
     },
     {
       icon: Clock,
       title: "Business Hours",
       content: "Mon-Fri: 8AM-6PM, Sat: 8AM-4PM",
-      description: "Emergency services available 24/7"
-    }
+      description: "Emergency services available 24/7",
+    },
   ];
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-b from-muted/30 to-background">
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-b from-muted/30 to-background"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -45,8 +49,8 @@ export default function Contact({ data }: { data: any }) {  //{ data }: { data: 
             {/* {data.heading} */}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Ready to modernize your agricultural operations? Contact our experts for 
-            personalized solutions and competitive pricing.
+            Ready to modernize your agricultural operations? Contact our experts
+            for personalized solutions and competitive pricing.
             {/* {data.description} */}
           </p>
         </div>
@@ -68,36 +72,38 @@ export default function Contact({ data }: { data: any }) {  //{ data }: { data: 
                   <Input id="lastName" placeholder="Ilya" />
                 </div>
               </div>
-              
-              <div className="space-y-2">
+
+              {/* <div className="space-y-2">
                 <Label htmlFor="email">Email Address</Label>
                 <Input id="email" type="email" placeholder="bello@example.com" />
-              </div>
-              
+              </div>*/}
               <div className="space-y-2">
                 <Label htmlFor="phone">Phone Number</Label>
                 <Input id="phone" type="tel" placeholder="+234 800 0000 111" />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="farmSize">Farm Size (ha)</Label>
                 <Input id="farmSize" placeholder="e.g., 500" />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="service">Service Interested In</Label>
-                <Input id="service" placeholder="e.g., Tractor purchase, Equipment rental" />
+                <Input
+                  id="service"
+                  placeholder="e.g., Tractor purchase, Equipment rental"
+                />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="message">Message</Label>
-                <Textarea 
-                  id="message" 
+                <Textarea
+                  id="message"
                   placeholder="Tell us about your specific needs and requirements..."
                   rows={4}
                 />
               </div>
-              
+
               <Button size="lg" className="w-full">
                 Send Message
               </Button>
@@ -112,16 +118,25 @@ export default function Contact({ data }: { data: any }) {  //{ data }: { data: 
               </h3>
               <div className="space-y-6">
                 {contactInfo.map((info, index) => (
-                  <Card key={index} className="border-border hover:shadow-md transition-shadow">
+                  <Card
+                    key={index}
+                    className="border-border hover:shadow-md transition-shadow"
+                  >
                     <CardContent className="p-6">
                       <div className="flex items-start space-x-4">
                         <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
                           <info.icon className="h-5 w-5 text-primary" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-foreground mb-1">{info.title}</h4>
-                          <p className="text-foreground font-medium mb-1">{info.content}</p>
-                          <p className="text-sm text-muted-foreground">{info.description}</p>
+                          <h4 className="font-semibold text-foreground mb-1">
+                            {info.title}
+                          </h4>
+                          <p className="text-foreground font-medium mb-1">
+                            {info.content}
+                          </p>
+                          <p className="text-sm text-muted-foreground">
+                            {info.description}
+                          </p>
                         </div>
                       </div>
                     </CardContent>
@@ -142,10 +157,10 @@ export default function Contact({ data }: { data: any }) {  //{ data }: { data: 
                 <ul className="space-y-2 text-sm">
                   {[
                     "Midwest Agricultural Belt",
-                    "Great Plains Region", 
+                    "Great Plains Region",
                     "Pacific Northwest",
                     "Southeastern Farming Communities",
-                    "Southwest Agricultural Areas"
+                    "Southwest Agricultural Areas",
                   ].map((area, index) => (
                     <li key={index} className="flex items-center">
                       <div className="w-1.5 h-1.5 bg-primary rounded-full mr-3" />
@@ -154,7 +169,8 @@ export default function Contact({ data }: { data: any }) {  //{ data }: { data: 
                   ))}
                 </ul>
                 <p className="text-sm text-muted-foreground mt-4">
-                  Don't see your area listed? Contact us to discuss service availability.
+                  Don't see your area listed? Contact us to discuss service
+                  availability.
                 </p>
               </CardContent>
             </Card>
@@ -163,4 +179,4 @@ export default function Contact({ data }: { data: any }) {  //{ data }: { data: 
       </div>
     </section>
   );
-};
+}
