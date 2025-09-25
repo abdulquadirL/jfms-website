@@ -16,9 +16,30 @@ type Article = {
   };
 };
 
+type StrapiArticleResponse = {
+  id: number;
+  attributes: {
+    title: string;
+    slug: string;
+    excerpt: string;
+    content: string;
+    featuredImage?: {
+      data: {
+        attributes: {
+          url: string;
+          alternativeText?: string;
+        };
+      } | null;
+    };
+  };
+};
+
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+ 
 async function getArticles(): Promise<Article[]> {
   const res = await fetch(
-    "http://localhost:1337/api/articles?populate=featuredImage&sort=createdAt:desc&pagination[limit]=3",
+    `${API_URL}/api/articles?populate=featuredImage&sort=createdAt:desc&pagination[limit]=3`,
     { cache: "no-store" }
   );
 
@@ -27,23 +48,23 @@ async function getArticles(): Promise<Article[]> {
     return [];
   }
 
-  const json = await res.json();
+  const json: { data: StrapiArticleResponse[] } = await res.json();
 
-  // Flatten response: extract only the fields we need
-  return json.data.map((article: any) => ({
+  return json.data.map((article) => ({
     id: article.id,
-    title: article.title,
-    slug: article.slug,
-    excerpt: article.excerpt,
-    content: article.content,
-    featuredImage: article.featuredImage
+    title: article.attributes.title,
+    slug: article.attributes.slug,
+    excerpt: article.attributes.excerpt,
+    content: article.attributes.content,
+    featuredImage: article.attributes.featuredImage?.data
       ? {
-          url: article.featuredImage.url,
-          alternativeText: article.featuredImage.alternativeText,
+          url: article.attributes.featuredImage.data.attributes.url,
+          alternativeText: article.attributes.featuredImage.data.attributes.alternativeText,
         }
       : undefined,
   }));
 }
+
 
 
 export default async function Page() {
