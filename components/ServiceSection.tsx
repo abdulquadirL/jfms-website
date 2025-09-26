@@ -1,6 +1,13 @@
+"use client";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tractor, Wrench, Truck, Users, Settings, Headphones } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Input } from "./ui/input";
+import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "./ui/dialog";
+import { Label } from "./ui/label";
+import { Textarea } from "./ui/textarea";
 
 type ServiceSectionProps = {
   data: {
@@ -9,10 +16,29 @@ type ServiceSectionProps = {
   };
 };
 
+interface QuoteFormData {
+  name?: string;
+  email?: string;
+  phone?: string;
+  service?: string;
+  message?: string;
+}
+
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
 
 export default function ServiceSection({ data }: ServiceSectionProps) {
   if (!data) return null;
   console.log(data);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [formData, setFormData] = useState<QuoteFormData>({
+    name: "",
+    phone: "",
+    service: "",
+    message: "",
+  });
+
   const services = [
     {
       icon: Tractor,
@@ -52,19 +78,54 @@ export default function ServiceSection({ data }: ServiceSectionProps) {
     }
   ];
 
+    // Handle input changes
+  const handleChange = (field: keyof QuoteFormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+
+  // Submit form to Strapi
+
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+
+    try {
+      const response = await fetch(`${API_URL}/api/contacts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: formData }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Request failed with status ${response.status}`);
+      }
+
+      toast.success("Quote request submitted successfully!");
+      setFormData({ name: "", phone: "", service: "", message: "" });
+      setIsModalOpen(false);
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to submit quote request");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
   return (
     <section id="services" className="py-20 bg-gradient-to-b from-background to-muted/30">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">
-            {/* Comprehensive Agricultural Solutions */}
             {data.heading}
           </h2>
           <p className="text-lg text-muted-foreground">
             {data.subheading}
-            {/* From cutting-edge machinery to expert support, we provide everything you need 
-            to modernize your agricultural operations and maximize productivity. */}
           </p>
         </div>
 
@@ -107,13 +168,87 @@ export default function ServiceSection({ data }: ServiceSectionProps) {
             Get a personalized consultation and quote today.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg">
+            <Button 
+              size="lg" 
+              onClick={() => window.location.href = "/schedule-consultation"}
+            >
               Schedule Consultation
             </Button>
-            <Button variant="outline" size="lg">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={() => setIsModalOpen(true)} 
+            >
               Request Quote
             </Button>
           </div>
+          {/* Modal for Quote Request */}
+          <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+          <DialogContent className="sm:max-w-lg">
+            <DialogHeader>
+              <DialogTitle>Request a Quote</DialogTitle>
+            </DialogHeader>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="name">Full Name</Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={e => handleChange("name", e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="phone">Phone Number</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={e => handleChange("phone", e.target.value)}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="service">Service Interested In</Label>
+                <Input
+                  id="service"
+                  value={formData.service}
+                  onChange={e => handleChange("service", e.target.value)}
+                  placeholder="e.g., Tractor purchase, Equipment rental"
+                  required
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="message">Message</Label>
+                <Textarea
+                  id="message"
+                  rows={4}
+                  value={formData.message}
+                  onChange={e => handleChange("message", e.target.value)}
+                  placeholder="Tell us about your specific needs..."
+                />
+              </div>
+
+              <DialogFooter className="flex justify-end gap-2">
+                <Button type="submit" size="lg" disabled={loading}>
+                  {loading ? "Submitting..." : "Send Request"}
+                </Button>
+                <Button
+                  type="button"
+                  size="lg"
+                  variant="outline"
+                  onClick={() => setIsModalOpen(false)}
+                >
+                  Cancel
+                </Button>
+              </DialogFooter>
+            </form>
+          </DialogContent>
+        </Dialog>
         </div>
       </div>
     </section>

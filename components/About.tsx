@@ -246,10 +246,10 @@ export default function About() {
           
             {/* Partner Logos */}
             <div className="flex flex-wrap justify-center  gap-4 pt-6">
-              <Image src="/ytoLogo.jpeg" alt="YTO" className="h-12" width={100} height={50} />
               <Image src="/agra.jpg" alt="AGRA" className="h-12 " width={100} height={50} />
-              <Image src="/camclogo.png" alt="CAMCEE" className="h-12" width={100} height={50} />
-              <Image src="/everyfarmerlogo.png" alt="Everyfarmer" className="h-12" width={100} height={50} />
+              <Image src="/ytoLogo.jpeg" alt="YTO" className="h-12" width={100} height={50} />
+              <Image src="/everyfarmerlogo.png" alt="Everyfarmer" className="h-12 w-40" width={120} height={70} />
+              <Image src="/camclogo.png" alt="CAMCEE" className="h-12 w-52" width={120} height={70} />
             </div>
         </div>
       </div>
