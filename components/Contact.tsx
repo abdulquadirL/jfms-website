@@ -35,8 +35,7 @@ const iconMap: Record<string, React.ComponentType<React.SVGProps<SVGSVGElement>>
 export default function Contact({ data }: ContactProps) {
   const [formData, setFormData] = useState({
     firstName: "",
-    lastName: "",
-    email: "",
+    lastName: "", 
     phone: "",
     farmSize: "",
     service: "",
@@ -54,7 +53,10 @@ export default function Contact({ data }: ContactProps) {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/contacts`, {
+      
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+ 
+      const res = await fetch(`${API_URL}/api/contacts`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -68,7 +70,7 @@ export default function Contact({ data }: ContactProps) {
       setFormData({
         firstName: "",
         lastName: "",
-        email: "",
+        
         phone: "",
         farmSize: "",
         service: "",
@@ -125,16 +127,7 @@ export default function Contact({ data }: ContactProps) {
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="email">Email Address</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    value={formData.email}
-                    onChange={e => handleChange("email", e.target.value)}
-                  
-                  />
-                </div>
+                
 
                 <div className="space-y-2">
                   <Label htmlFor="phone">Phone Number</Label>
@@ -146,17 +139,10 @@ export default function Contact({ data }: ContactProps) {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="farmSize">Farm Size (ha)</Label>
-                  <Input
-                    id="farmSize"
-                    value={formData.farmSize}
-                    onChange={e => handleChange("farmSize", e.target.value)}
-                  />
-                </div>
+                 
 
                 <div className="space-y-2">
-                  <Label htmlFor="service">Service Interested In</Label>
+                  <Label htmlFor="service">Subject</Label>
                   <Input
                     id="service"
                     value={formData.service}
