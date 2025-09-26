@@ -35,7 +35,9 @@ const nextConfig: NextConfig = {
         hostname: "portal.jsmc.org.ng",
         pathname: "/**",
       },
+      
     ],
+    unoptimized: true,
   },
 };
 
