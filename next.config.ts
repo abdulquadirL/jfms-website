@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
-   images: {
+  images: {
     remotePatterns: [
       {
         protocol: "http",
@@ -15,9 +15,24 @@ const nextConfig: NextConfig = {
         hostname: "jsmc.everyfarmer.farm",
         pathname: "/**",
       },
-       {
+      {
         protocol: "http",
         hostname: "jsmc.everyfarmer.farm",
+        pathname: "/**",
+      },
+      {
+        protocol: "http",
+        hostname: "jsfmc.everyfarmer.farm",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
+        hostname: "jsfmc.everyfarmer.farm",
+        pathname: "/**",
+      }, 
+      {
+        protocol: "https",
+        hostname: "portal.jsmc.org.ng",
         pathname: "/**",
       },
     ],
