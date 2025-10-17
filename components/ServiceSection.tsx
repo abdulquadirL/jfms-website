@@ -25,7 +25,6 @@ interface QuoteFormData {
 }
 
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
 
 export default function ServiceSection({ data }: ServiceSectionProps) {
   if (!data) return null;
@@ -92,6 +91,7 @@ export default function ServiceSection({ data }: ServiceSectionProps) {
     setLoading(true);
 
     try {
+      const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
       const response = await fetch(`${API_URL}/api/contacts`, {
         method: "POST",
         headers: {
