@@ -75,7 +75,7 @@ export default async function Page() {
 
   const data = await fetch(`${API_URL}/api/home-page?populate[blocks][on][layout.hero][populate]=*`)
   const homes = await data.json()
-  console.log(homes.data.blocks[2])
+  console.log(homes.data?.blocks[2])
 //data={homes.data.blocks[2]}
   if (!homes) {
     return <div>Loading...</div>;
@@ -83,11 +83,11 @@ export default async function Page() {
   return (
     <div className="min-h-screen">
     <main className="w-[85vw] mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <HeroSection data={homes.data.blocks[0]} />
-        <ServiceSection data={homes.data.blocks[1]} />
+        <HeroSection data={homes.data?.blocks[0]} />
+        <ServiceSection data={homes.data?.blocks[1]} />
         <News articles={articles} />
         <About />
-        <Contact data={homes.data.blocks[3]} />
+        <Contact data={homes.data?.blocks[3]} />
     </main>
     
     </div>

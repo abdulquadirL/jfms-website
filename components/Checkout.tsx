@@ -1,130 +1,91 @@
+"use client";
 
-// 'use client';
+import React, { useMemo } from "react";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import { Label } from "./ui/label";
+import { Input } from "./ui/input";
 
-// import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-// import { Farmer } from '../types';
+export default function Checkout({ booking }: { booking: any }) {
 
-// interface CheckoutProps {
-//   farmer: Farmer;
-//   totalAmount: number;
-// }
+  const [paymentEmail, setPaymentEmail] = React.useState(booking.paymentEmail || booking.farmer?.email || "");
+  const [paymentPhone, setPaymentPhone] = React.useState(booking.paymentPhone || booking.farmer?.phone || "");
+  const config = useMemo(
+    () => ({
+      public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY!,
+      tx_ref: booking.bookingReference,
+      amount: Number(booking.totalCost),
+      currency: "NGN",
+      payment_options: "card,banktransfer,ussd",
+      customer: {
+        email:paymentEmail,
+        phone_number: paymentPhone,
+        name: booking.farmer?.name,
+      },
+      customizations: {
+        title: "Farm Mechanization Payment",
+        description: booking.serviceType?.name,
+      },
+    }),
+    [booking]
+  );
 
-// export default function CheckoutButton({ farmer, totalAmount }: CheckoutProps) {
-//   // Generate unique transaction reference
-//   const generateReference = () => {
-//     return `FM_${farmer.tempId}_${Date.now()}`;
-//   };
+  const handleFlutterPayment = useFlutterwave(config as any);
 
-//   const config = {
-//     public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY!, 
-//     tx_ref: generateReference(),
-//     amount: totalAmount,
-//     currency: 'NGN', 
-//     payment_options: 'card,mobilemoney,ussd',
-//     customer: {
-//       email: 'farmer@example.com',
-//       name: farmer.name,
-//       phone_number: farmer.phone, 
-//     },
-//     customizations: {
-//       title: 'Farm Mechanization Services',
-//       description: `Payment for services rendered to ${farmer.name}`,
-//       logo: 'https://jsfmc.org.ng/logo.png',
-//     },
-//   };
+  const payNow = () => {
+    if(paymentEmail.trim() === "" || paymentPhone.trim() === "") {
+      alert("Please provide both email and phone number for payment.");
+      return;
+    } 
 
-//   const handleFlutterPayment = useFlutterwave(config);
-
-//   const handlePayment = () => {
-//     handleFlutterPayment({
-//       callback: (response) => {
-//         console.log('Payment Response:', response);
-        
-//         // Handle successful payment
-//         if (response.status === 'completed') {
-//           // redirect to success page or update UI
-//           alert('Payment Successful! Reference: ' + response.transaction_id);
-          
-//         }
-        
-//         closePaymentModal();
-//       },
-//       onClose: () => {
-//         // Handle when modal is closed
-//         console.log('Payment modal closed');
-//       },
-//     });
-//   };
-
-//   return (
-//     <button
-//       onClick={handlePayment}
-//       className="ml-3 inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-//       disabled={totalAmount <= 0}
-//     >
-//       Pay ₦{totalAmount.toLocaleString()} 
-//     </button>
-//   );
-// }
-
-// components/FlutterwaveCheckout.tsx
-'use client';
-
-import { useFlutterwave, closePaymentModal } from 'flutterwave-react-v3';
-import { Farmer } from '../types';
-
-interface CheckoutProps {
-  farmer: Farmer;
-  totalAmount: number;
-}
-
-export default function Checkout({ farmer, totalAmount }: CheckoutProps) {
-  const generateReference = () => {
-    return `FM_${farmer.tempId}_${Date.now()}`;
-  };
-
-  const config = {
-    public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_PUBLIC_KEY!,
-    tx_ref: generateReference(),
-    amount: totalAmount,
-    currency: 'NGN',
-    payment_options: 'card,mobilemoney,ussd',
-    customer: {
-      phone: farmer.phone_number,
-      name: farmer.name,
-      email: farmer.email
-    },
-    customizations: {
-      title: 'Farm Mechanization Services',
-      description: `Payment for services rendered to ${farmer.name}`,
-      logo: 'https://your-company-logo.com/logo.png',
-    },
-  };
-
-  const handleFlutterPayment = useFlutterwave(config);
-
-  const handlePayment = () => {
+    console.log("Payment config:", config);
+    console.log("Starting payment for booking:", booking.bookingReference);
     handleFlutterPayment({
-      callback: (response) => {
-        console.log('Payment Response:', response);
-        if (response.status === 'completed') {
-          alert('Payment Successful! Reference: ' + response.transaction_id);
+      callback: async (response) => {
+        if (response.status === "successful") {
+          await fetch(
+            `${process.env.NEXT_PUBLIC_API_BASE_URL}/bookings/${booking.bookingReference}/confirm-payment` +
+              `?paymentReference=${response.transaction_id}` +
+              `&paymentEmail=${config.customer.email}` +
+              `&paymentPhone=${config.customer.phone_number}`,
+            { method: "PATCH" }
+          );
         }
         closePaymentModal();
       },
-      onClose: () => {
-        console.log('Payment modal closed');
-      },
+      onClose: () => {},
     });
   };
 
   return (
-    <button
-      onClick={handlePayment}
-      className="ml-3 inline-flex justify-center py-3 px-6 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-primary hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
-      disabled={totalAmount <= 0}
-    >
-      Pay ₦{totalAmount.toLocaleString()} with Flutterwave
-    </button>
+    <>
+      <div className="grid grid-cols-2 gap-4">
+        <div className="space-y-2">
+          <Label htmlFor="paymentEmail">Email</Label>
+          <Input
+            id="paymentEmail"
+            value={paymentEmail}
+            onChange={(e) => setPaymentEmail(e.target.value)}
+            required
+            type="email"
+          />
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="paymentPhone">Phone Number</Label>
+          <Input
+            id="paymentPhone"
+            value={paymentPhone}
+            onChange={(e) => setPaymentPhone(e.target.value)}
+            required
+          />
+        </div>
+      </div>
+
+      <button
+        onClick={payNow}
+        className="bg-green-600 text-white px-8 py-3 rounded text-lg"
+      >
+        Pay ₦{Number(booking.totalCost).toLocaleString()}
+      </button>
+    </>
   );
 }
