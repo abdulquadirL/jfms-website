@@ -58,7 +58,7 @@ export default function Checkout({ booking }: { booking: any }) {
 
   return (
     <>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-2 gap-4 m-5">
         <div className="space-y-2">
           <Label htmlFor="paymentEmail">Email</Label>
           <Input
