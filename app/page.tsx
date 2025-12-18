@@ -1,8 +1,12 @@
+
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import HeroSection from "@/components/HeroSection";
 import News from "@/components/News";
 import ServiceSection from "@/components/ServiceSection";
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
+
 
 type Article = {
   id: number;
@@ -16,27 +20,6 @@ type Article = {
   };
 };
 
-type StrapiArticleResponse = {
-  id: number;
-  attributes: {
-    title: string;
-    slug: string;
-    excerpt: string;
-    content: string;
-    featuredImage?: {
-      data: {
-        attributes: {
-          url: string;
-          alternativeText?: string;
-        };
-      } | null;
-    };
-  };
-};
-
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:1337";
- 
 async function getArticles(): Promise<Article[]> {
   const res = await fetch(
     `${API_URL}/api/articles?populate=featuredImage&sort=createdAt:desc&pagination[limit]=3`,
@@ -47,50 +30,64 @@ async function getArticles(): Promise<Article[]> {
     console.error("Failed to fetch articles:", res.statusText);
     return [];
   }
-  const data =  await res.json();
-  return data.data
 
-  // const json: { data: StrapiArticleResponse[] } = await res.json();
+  const json = await res.json();
 
-  // return json.data.map((article) => ({
-  //   id: article.id,
-  //   title: article.attributes?.title,
-  //   slug: article.attributes?.slug,
-  //   excerpt: article.attributes?.excerpt,
-  //   content: article.attributes?.content,
-  //   featuredImage: article.attributes?.featuredImage?.data
-  //     ? {
-  //         url: article.attributes.featuredImage.data.attributes?.url,
-  //         alternativeText: article.attributes.featuredImage.data.attributes?.alternativeText,
-  //       }
-  //     : undefined,
-  // }));
+  return json.data.map((item: any) => ({
+    id: item.id,
+    title: item.title,
+    slug: item.slug,
+    excerpt: item.excerpt,
+    content: item.content,
+    featuredImage: item.featuredImage
+      ? {
+          url: item.featuredImage.url,
+          alternativeText: item.featuredImage.alternativeText,
+        }
+      : undefined,
+  }));
 }
 
 
 
 export default async function Page() {
-  const articles = await getArticles();
-  console.log("ARTICLE:",articles)
+  const [articles, homeRes] = await Promise.all([
+    getArticles(),
+    fetch(
+      `${API_URL}/api/home-page?populate[blocks][populate]=*`,
+      { cache: "no-store" }
+    ),
+  ]);
 
-  const data = await fetch(`${API_URL}/api/home-page?populate[blocks][on][layout.hero][populate]=*`)
-  const homes = await data.json()
-  console.log(homes.data.blocks[2])
-//data={homes.data.blocks[2]}
-  if (!homes) {
-    return <div>Loading...</div>;
+  if (!homeRes.ok) {
+    return <div>Failed to load homepage</div>;
   }
+
+  const homes = await homeRes.json();
+
+  const blocks = homes?.data?.blocks ?? [];
+
+  const heroBlock = blocks.find(
+  (block: any) => block.__component === 'blocks.hero'
+);
+
+
+  const serviceBlock = blocks.find(
+    (block: any) => block.__component === "blocks.service-section"
+  );
+
+  const contactBlock = blocks.find(
+    (block: any) => block.__component === "blocks.contact-section"
+  );
+
   return (
-    <div className="min-h-screen">
-    <main className="w-[85vw] mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <HeroSection data={homes.data.blocks[0]} />
-        <ServiceSection data={homes.data.blocks[1]} />
-        <News articles={articles} />
-        <About />
-        <Contact data={homes.data.blocks[3]} />
+    <main className="min-h-screen w-[85vw] mx-auto px-4 sm:px-6 lg:px-8 py-10">
+      
+      {heroBlock && <HeroSection data={heroBlock} />}
+      {serviceBlock && <ServiceSection data={serviceBlock} />}
+      {<News articles={articles} />}
+      <About />
+      <Contact data={contactBlock} />
     </main>
-    
-    </div>
-    
-  )
+  );
 }
