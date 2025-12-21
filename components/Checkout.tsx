@@ -1,5 +1,6 @@
 "use client";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useMemo } from "react";
 import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
 import { Label } from "./ui/label";

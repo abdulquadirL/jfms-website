@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import HeroSection from "@/components/HeroSection";
