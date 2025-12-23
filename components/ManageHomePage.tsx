@@ -25,16 +25,6 @@ export default function ManageHomePage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [homes, setHomes] = useState<any>();
 
-//   const fetchHome = async () => {
-//     await fetch(`${API_URL}/api/home-page?populate[blocks][populate]=*`, {
-//       cache: "no-store",
-//     })
-//       .then((data) => {
-//         setHome(data);
-//       })
-//       .catch((err) => {});
-//   };
-
 const fetchHome = async () => {
   try {
     const response = await fetch(`${API_URL}/api/home-page?populate=*`, {
