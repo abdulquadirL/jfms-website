@@ -1,4 +1,5 @@
 "use client";
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import About from "@/components/About";
 import Contact from "@/components/Contact";
 import HeroSection from "@/components/HeroSection";
@@ -23,16 +24,6 @@ type Article = {
 export default function ManageHomePage() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [homes, setHomes] = useState<any>();
-
-//   const fetchHome = async () => {
-//     await fetch(`${API_URL}/api/home-page?populate[blocks][populate]=*`, {
-//       cache: "no-store",
-//     })
-//       .then((data) => {
-//         setHome(data);
-//       })
-//       .catch((err) => {});
-//   };
 
 const fetchHome = async () => {
   try {

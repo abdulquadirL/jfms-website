@@ -3,9 +3,9 @@ import { NextResponse } from 'next/server';
 
 export async function GET(
   request: Request,
-  { params }: { params: { refId: string } }
+  { params }: { params: Promise<{ refId: string }> }
 ) {
-  const { refId } = params;
+  const { refId } = await params;
 
   try {
     // Replace this with your actual database query
