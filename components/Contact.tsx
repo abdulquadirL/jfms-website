@@ -63,7 +63,7 @@ export default function Contact({ data }: ContactProps) {
     setIsSubmitting(true);
 
     try {
-      const res = await fetch(`${API_URL}/api/contacts`, {
+      const res = await fetch(`${API_URL}/api/contact-uses`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ data: formData }),
@@ -123,7 +123,7 @@ export default function Contact({ data }: ContactProps) {
           {/* Contact Form */}
           <Card className="border-border">
             <CardHeader>
-              <CardTitle className="text-2xl">Send Us a Message</CardTitle>
+              <CardTitle className="text-2xl">Send Us a Message </CardTitle>
             </CardHeader>
             <CardContent>
               <form className="space-y-6" onSubmit={handleSubmit}>
