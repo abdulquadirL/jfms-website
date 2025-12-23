@@ -42,12 +42,14 @@ export default function HandlePayment() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4">
-      <div className="max-w-4xl mx-auto space-y-8">
+    <div className="min-h-screen bg-gray-50 px-4 py-6 sm:py-10">
+      <div className="max-w-4xl mx-auto space-y-6">
         {/* Header */}
-        <div className="text-center">
-          <h1 className="text-3xl font-bold">Farm Mechanization Payment</h1>
-          <p className="text-gray-500 mt-2">
+        <div className="text-center px-2">
+          <h1 className="text-2xl sm:text-3xl font-bold">
+            Farm Mechanization Payment
+          </h1>
+          <p className="text-gray-500 mt-2 text-sm sm:text-base">
             Enter your booking reference to complete payment
           </p>
         </div>
@@ -55,18 +57,18 @@ export default function HandlePayment() {
         {/* Search */}
         <form
           onSubmit={handleSearch}
-          className="bg-white shadow rounded-lg p-6 flex gap-3"
+          className="bg-white shadow rounded-lg p-4 sm:p-6 flex flex-col sm:flex-row gap-3"
         >
           <input
             value={bookingRef}
             onChange={(e) => setBookingRef(e.target.value.toUpperCase())}
             placeholder="Booking Reference (e.g. BK-2024-001)"
-            className="flex-1 border rounded px-4 py-3"
+            className="w-full flex-1 border rounded px-4 py-3 text-sm sm:text-base"
             disabled={loading}
           />
           <button
             disabled={loading || !bookingRef.trim()}
-            className="bg-primary text-white px-6 py-3 rounded disabled:opacity-50"
+            className="w-full sm:w-auto bg-primary text-white px-6 py-3 rounded text-sm sm:text-base disabled:opacity-50"
           >
             {loading ? "Searching..." : "Search"}
           </button>
@@ -74,7 +76,7 @@ export default function HandlePayment() {
 
         {/* Error */}
         {error && (
-          <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded">
+          <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded text-sm">
             {error}
           </div>
         )}
@@ -82,15 +84,17 @@ export default function HandlePayment() {
         {/* Booking Details */}
         {booking && (
           <div className="bg-white shadow rounded-lg overflow-hidden">
-            <div className="p-6 border-b">
-              <h3 className="text-lg font-semibold">Booking Details</h3>
-              <p className="text-sm text-gray-500">
+            <div className="p-4 sm:p-6 border-b">
+              <h3 className="text-base sm:text-lg font-semibold">
+                Booking Details
+              </h3>
+              <p className="text-xs sm:text-sm text-gray-500">
                 Reference: {booking.bookingReference}
               </p>
             </div>
 
-            <div className="p-6 grid md:grid-cols-2 gap-6">
-              <div>
+            <div className="p-4 sm:p-6 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
+              <div className="space-y-1 text-sm sm:text-base">
                 <p>
                   <b>Farmer:</b> {booking.farmer?.name}
                 </p>
@@ -106,13 +110,15 @@ export default function HandlePayment() {
               </div>
 
               <div className="bg-gray-50 p-4 rounded">
-                <p className="text-sm text-gray-500">Total Amount</p>
-                <p className="text-3xl font-bold text-green-600">
+                <p className="text-xs sm:text-sm text-gray-500">
+                  Total Amount
+                </p>
+                <p className="text-2xl sm:text-3xl font-bold text-green-600">
                   ₦{Number(booking.totalCost).toLocaleString()}
                 </p>
 
                 {booking.paymentStatus === "CONFIRMED" && (
-                  <span className="inline-block mt-2 text-green-700 text-sm">
+                  <span className="inline-block mt-2 text-green-700 text-xs sm:text-sm">
                     Payment already confirmed
                   </span>
                 )}
@@ -121,8 +127,10 @@ export default function HandlePayment() {
 
             {/* Checkout */}
             {booking.paymentStatus !== "CONFIRMED" && (
-              <div className="p-6 border-t flex justify-end">
-                <Checkout booking={booking} />
+              <div className="p-4 sm:p-6 border-t flex flex-col sm:flex-row sm:justify-end">
+                <div className="w-full sm:w-auto">
+                  <Checkout booking={booking} />
+                </div>
               </div>
             )}
           </div>
